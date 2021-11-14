@@ -1,4 +1,4 @@
-livereload: true
+# livereload: true
 # Welcome to Jekyll!
 #
 # This config file is meant for settings that affect your entire site, values
@@ -107,12 +107,12 @@ author:
   name             : "F4_U57"
   avatar           : "/assets/images/avatar.jpg"
   bio              : |
-    Sophomore at ASU 
+    Sophomore at ASU
 
     Studying CS
 
     Learning PWN
-  location         : 
+  location         :
   email            :
   links:
     - label: "Email"
@@ -214,6 +214,9 @@ kramdown:
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
 
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
 
 # Sass/SCSS
 sass:
@@ -281,8 +284,18 @@ compress_html:
   ignore:
     envs: development
 
-
 # Defaults
+
+
+defaults:
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+
 defaults:
   # _posts
   - scope:
@@ -294,4 +307,3 @@ defaults:
       read_time: true
       comments: # true
       share: false
-      related: true
