@@ -1,62 +1,37 @@
-## Installation
+## Welcome to GitHub Pages
 
-There are three ways to install: as a [gem-based theme](https://jekyllrb.com/docs/themes/#understanding-gem-based-themes), as a [remote theme](https://blog.github.com/2017-11-29-use-any-theme-with-github-pages/) (GitHub Pages compatible), or forking/directly copying all of the theme files into your project.
+You can use the [editor on GitHub](https://github.com/f4-u57/f4-u57.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
 
-### Gem-based method
+Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-With Gem-based themes, directories such as the `assets`, `_layouts`, `_includes`, and `_sass` are stored in the theme’s gem, hidden from your immediate view. Yet all of the necessary directories will be read and processed during Jekyll’s build process.
+### Markdown
 
-This allows for easier installation and updating as you don't have to manage any of the theme files. To install:
+Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-1. Add the following to your `Gemfile`:
+```markdown
+Syntax highlighted code block
 
-   ```ruby
-   gem "minimal-mistakes-jekyll"
-   ```
+# Header 1
+## Header 2
+### Header 3
 
-2. Fetch and update bundled gems by running the following [Bundler](http://bundler.io/) command:
+- Bulleted
+- List
 
-   ```bash
-   bundle
-   ```
+1. Numbered
+2. List
 
-3. Set the `theme` in your project's Jekyll `_config.yml` file:
+**Bold** and _Italic_ and `Code` text
 
-   ```yaml
-   theme: minimal-mistakes-jekyll
-   ```
+[Link](url) and ![Image](src)
+```
 
-To update the theme run `bundle update`.
+For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 
-### Remote theme method
+### Jekyll Themes
 
-Remote themes are similar to Gem-based themes, but do not require `Gemfile` changes or whitelisting making them ideal for sites hosted with GitHub Pages.
+Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/f4-u57/f4-u57.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-To install:
+### Support or Contact
 
-1. Create/replace the contents of your `Gemfile` with the following:
-
-   ```ruby
-   source "https://rubygems.org"
-
-   gem "github-pages", group: :jekyll_plugins
-   gem "jekyll-include-cache", group: :jekyll_plugins
-   ```
-
-2. Add `jekyll-include-cache` to the `plugins` array of your `_config.yml`.
-
-3. Fetch and update bundled gems by running the following [Bundler](http://bundler.io/) command:
-
-   ```bash
-   bundle
-   ```
-
-4. Add `remote_theme: "mmistakes/minimal-mistakes@4.24.0"` to your `_config.yml` file. Remove any other `theme:` or `remote_theme:` entry.
-
-**Looking for an example?** Use the [Minimal Mistakes remote theme starter](https://github.com/mmistakes/mm-github-pages-starter/generate) for the quickest method of getting a GitHub Pages hosted site up and running. Generate a new repository from the starter, replace sample content with your own, and configure as needed.
-
-## Usage
-
-For detailed instructions on how to configure, customize, add/migrate content, and more read the [theme's documentation](https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/).
-
----
+Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
