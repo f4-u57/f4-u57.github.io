@@ -235,7 +235,7 @@ sass:
 permalink: /:categories/:title/
 paginate: 5 # amount of posts to show
 paginate_path: /page:num/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: "America/Phoenix" # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
 # Plugins (previously gems:)
@@ -245,6 +245,9 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
+  - jekyll-last-modified-at
+  - jemoji
+
 
 # mimic GitHub Pages with --safe
 whitelist:
@@ -253,7 +256,8 @@ whitelist:
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
-
+  - jekyll-last-modified-at
+  - jemoji
 
 # Archives
 #  Type
@@ -290,6 +294,11 @@ compress_html:
   clippings: all
   ignore:
     envs: development
+    
+# last modified
+  last-modified-at:
+      date-format: '%d-%b-%y'
+
 
 # Defaults
 
