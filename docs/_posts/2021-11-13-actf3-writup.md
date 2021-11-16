@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  "aCTF3 - mommyservice Writeup"
-last_modified_at: 2021-11-15
+last_modified_at: 2021-11-16
 ---
 
 A post about the `mommyservice` from `aCTF3`.
@@ -37,7 +37,7 @@ I spent the entire time on `mommyservice`, so I will only talk about that in thi
 
 # Code review and interacting with mommyservice
 
-## main serv()
+## Main serv()
 
 I looked at the source code first before interacting with the service.
 
@@ -98,13 +98,17 @@ So, we need to:
 1. send each team's `flag_id` to `backdoor()` to get password of `flag_id`.
 2. send `flag_id` and its password to `get_baby_name`, which is the name of `flag_id`.
 
-I created my own baby name `a_flag_goes_here`, which have `bx97JrXMl3` as its `baby_id` and `kudBTrPH6x2daYsGlNOj` as its password.
+### Demo 
+
+For this demo, I created my own baby name `flag{close_your_backdoor}`, which have `P48IFFfxrS` as its `baby_id` and `MXTukjsUQL3OLsnj1C7O` as its password
 
 ![](../assets/posts/2021-11-13-actf3-writup/images/backdoor_demo.png)
 
-### patch
+### Patch
 
 We patched this by just not calling it in the main service function, replace `backdoor()` with `pass`.
+
+![](../assets/posts/2021-11-13-actf3-writup/images/backdoor_patched.png)
 
 ## get_baby_name() :fire:
 
@@ -194,7 +198,16 @@ if __name__ == "__main__":
     for i in range(4):
         verify();
 ```
-### patch
+
+### Demo 
+
+For this demo, I created my own baby name `flag{all_is_not_any}`, which have `rFHFHXfRa4` as its `baby_id` and `zK0VBBADEPnGODHVBFjN` as its password
+
+![](../assets/posts/2021-11-13-actf3-writup/images/get_baby_demo.png)
+
+![](../assets/posts/2021-11-13-actf3-writup/images/get_baby_demo2.png)
+
+### Patch
 
 We patched this by changing `any` to `all` in the check condition within the function.
 
@@ -203,6 +216,8 @@ This will check if **all** of our input hash bytes (`b0`) match **all** of the p
 ```python
 if all(b0 == b1 for b0, b1 in zip(hash_0, hash_1)):
 ```
+
+![](../assets/posts/2021-11-13-actf3-writup/images/get_baby_patched.png)
 
 # Scripts
 
