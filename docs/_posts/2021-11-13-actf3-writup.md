@@ -13,7 +13,8 @@ Before we start, I want to thank:
 
 # Intro
 
-This weekend, I played my first attack and defend style CTF with *@SirSquibbins* under team **sashimi**. This CTF was very cool and well organized. I also liked the 4 hours length, short enough to spare my monitor for another day (:anger::punch::computer:), long enough to learn and practice something cool.
+This weekend, I played my first attack and defend style CTF with *@SirSquibbins* under team **sashimi**. 
+This CTF was very cool and well organized. I also liked the 4 hours length, short enough to spare my monitor for another day (:anger::punch::computer:), long enough to learn and practice something cool.
 
 # Setting up and picking a challenge
 
@@ -52,6 +53,8 @@ So, the main service function takes an input and calls different functions accor
 - `yeet` ➡ `backdoor()`
 - `3` ➡ `print bye message`
 - `anything else` ➡ `print error message`
+
+![](../assets/posts/2021-11-13-actf3-writup/images/main-serv.png)
 
 Let's break down the functions.
 
