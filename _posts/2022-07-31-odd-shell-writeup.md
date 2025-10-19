@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "UIUCTF22 - odd shell Writeup"
+title:  "UIUCTF 2022 - odd shell Writeup"
 last_modified_at: 2022-08-02
 ---
 
@@ -28,13 +28,13 @@ The program is pretty simple:
 
 ![](../assets/posts/2022-07-31-odd-shell-writeup/images/IDA.png)
 
-1. A page with the size `0x100` gets allocated at `0x123412340000` in memory. The page can read, write, and execute data. 
+1. A page with the size `0x100` gets allocated at `0x123412340000` in memory. The page can read, write, and execute data.
 
 2. The input is read to the allocated page.
 
-3. If the input ends with a new line character, it will get replaced with a null byte. 
+3. If the input ends with a new line character, it will get replaced with a null byte.
 
-4. The for loop iterates every byte of the input, and if the byte is even, it exits. In other words, only odd bytes are allowed in the input. 
+4. The for loop iterates every byte of the input, and if the byte is even, it exits. In other words, only odd bytes are allowed in the input.
 
 5. The input is interrupted as instructions.
 
@@ -78,7 +78,7 @@ Clear register: `xor r11, r11`
 
 Exchange value between the two registers: `xchg r11, rdi`
 
-Write the odd byte to pass the filter, then increment it: 
+Write the odd byte to pass the filter, then increment it:
 
 ```
 add r11, 0x67

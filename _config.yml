@@ -107,14 +107,12 @@ analytics:
 
 # Site Author
 author:
-  name             : "F4_U57"
+  name             : "F4_U57 | Jude O'Kain"
   avatar           : "/assets/images/avatar.jpg"
   bio              : |
-    Sophomore at ASU
+    Senior CS Undergrad @ ASU
 
-    Studying CS
-
-    Learning PWN
+    Reversing/PWNing based on mood
   location         :
   email            :
   links:
@@ -293,7 +291,7 @@ compress_html:
   clippings: all
   ignore:
     envs: development
-    
+
 # last modified
   last-modified-at:
       date-format: '%d-%b-%y'
