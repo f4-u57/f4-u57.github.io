@@ -24,7 +24,7 @@ In the challenge docker:
 2. set the nginx config and copy over the challenge files.
 3. run the bash commands:
     - `nginx; echo \"$FLAG\" > /flag.txt` which saves the flag from the `FLAG` environment variable to the `/flag.txt` file.
-    - `socat TCP4-LISTEN:8080,reuseaddr,fork EXEC:/srv/polygod` which sets up `socat` to listen on TCP port `8080` for incoming connection, forks on a new connection to execute `/srv/polygod`, and pipes the data from the connection to ``/srv/polygod` and the output of `/srv/polygod` back to the connection.
+    - `socat TCP4-LISTEN:8080,reuseaddr,fork EXEC:/srv/polygod` which sets up `socat` to listen on TCP port `8080` for incoming connection, forks on a new connection to execute `/srv/polygod`, and pipes the data from the connection to `/srv/polygod` and the output of `/srv/polygod` back to the connection.
 
 ```docker
 FROM ubuntu@sha256:dc17125eaac86538c57da886e494a34489122fb6a3ebb6411153d742594c2ddc
