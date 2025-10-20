@@ -1,0 +1,7 @@
+services:
+  polygod:
+    build: .
+    ports:
+      - 4000:80
+    environment:
+      FLAG: flag{fake-flag}
