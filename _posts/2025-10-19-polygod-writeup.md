@@ -2,6 +2,7 @@
 layout: single
 title:  "Hack.lu CTF 2025 - polygod Writeup"
 last_modified_at: 2025-10-19
+description: "polygod from Hack.lu CTF 2025: smuggling a request past nginx and its proxy to land shellcode."
 ---
 
 Shellcoding but through nginx and its proxy.

@@ -2,6 +2,7 @@
 layout: single
 title:  "UIUCTF 2022 - odd shell Writeup"
 last_modified_at: 2022-08-02
+description: "odd shell from UIUCTF 2022: writing working x86-64 shellcode using only odd bytes."
 ---
 
 Shellcoding but with only odd bytes.

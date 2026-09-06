@@ -2,6 +2,7 @@
 layout: single
 title:  "aCTF3 - mommyservice Writeup"
 last_modified_at: 2021-11-16
+description: "my first time playing an attack-and-defense CTF."
 ---
 
 A post about the `mommyservice` from `aCTF3`.
@@ -13,7 +14,7 @@ Before we start, I want to thank:
 
 # Intro
 
-This weekend, I played my first attack and defend style CTF with *@SirSquibbins* under team **sashimi**. 
+This weekend, I played my first attack and defend style CTF with *@SirSquibbins* under team **sashimi**.
 This CTF was very cool and well organized. I also liked the 4 hours length, short enough to spare my monitor for another day (:anger::punch::computer:), long enough to learn and practice something cool.
 
 # Setting up and picking a challenge
@@ -101,7 +102,7 @@ So, we need to:
 1. send each team's `flag_id` to `backdoor()` to get password of `flag_id`.
 2. send `flag_id` and its password to `get_baby_name`, which is the name of `flag_id`.
 
-### Demo 
+### Demo
 
 For this demo, I created my own baby name `flag{close_your_backdoor}`, which have `P48IFFfxrS` as its `baby_id` and `MXTukjsUQL3OLsnj1C7O` as its password
 
@@ -202,7 +203,7 @@ if __name__ == "__main__":
         verify();
 ```
 
-### Demo 
+### Demo
 
 For this demo, I created my own baby name `flag{all_is_not_any}`, which have `rFHFHXfRa4` as its `baby_id` and `zK0VBBADEPnGODHVBFjN` as its password
 

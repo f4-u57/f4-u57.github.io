@@ -21,17 +21,17 @@ minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "
 
 # Site Settings
 locale                   : "en-US"
-title                    : "A journey driven by curiosity"
+title                    : "Jude O'Kain"
 title_separator          : "-"
-subtitle                 : "A blog about reversing, pwning, or rabit holes I found interesting enough get to the bottom of."
+subtitle                 : "A blog about reversing, pwning, or rabbit holes I found interesting enough to get to the bottom of."
 name                     : "Jude O'Kain"
-description              : ""
+description              : "Jude O'Kain (F4_U57) is a security researcher who writes about reverse engineering, binary exploitation, and CTF challenges."
 url                      : https://f4-u57.github.io
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "f4-u57/f4-u57.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
-masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
+masthead_title           : "A journey driven by curiosity" # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
@@ -84,18 +84,20 @@ baidu_site_verification  :
 
 # Social Sharing
 twitter:
-  username               :
+  username               : "F4_U57"
 facebook:
   username               :
   app_id                 :
   publisher              :
-og_image                 : # Open Graph/Twitter default site image
+og_image                 : "/assets/images/avatar.jpg" # Open Graph/Twitter default site image
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
-  type                   : # Person or Organization (defaults to Person)
-  name                   : # If the user or organization name differs from the site's name
+  type                   : "Person" # Person or Organization (defaults to Person)
+  name                   : "Jude O'Kain" # If the user or organization name differs from the site's name
   links: # An array of links to social media profiles
+    - "https://twitter.com/F4_U57"
+    - "https://github.com/f4-u57"
 
 
 analytics:
@@ -107,10 +109,10 @@ analytics:
 
 # Site Author
 author:
-  name             : "F4_U57 | Jude"
+  name             : "F4_U57 | Jude O'Kain"
   avatar           : "/assets/images/avatar.jpg"
   bio              : |
-    Senior CS Undergrad @ ASU
+    Security Researcher
 
     Reversing/PWNing based on mood
   location         :
